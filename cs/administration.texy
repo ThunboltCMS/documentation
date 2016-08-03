@@ -21,7 +21,7 @@ class AdminPresenter extends AdminModule\AdminPresenter {
 \--
 
 Hlavní modul obsahuje autentikátor Thunbolt\User\Authenticator, který lze nahradit za svůj. Jméno služby je
-**thunbolt.authenticator**.
+**user.authenticator**.
 
 
 Ještě je potřeba vytvořit entity pro uživatele, která musí implementovat rozhraní Thunbolt\User\Interfaces\IUser, pokud
