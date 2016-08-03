@@ -3,7 +3,7 @@
 class ThunboltDocsLoader {
 
 	public static function getFile(string $lang, string $file): string {
-		return __DIR__ . '/' . $lang . '/' . $file;
+		return __DIR__ . '/../' . $lang . '/' . $file;
 	}
 
 }
