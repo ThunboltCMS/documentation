@@ -1,0 +1,70 @@
+Psaní doplňků
+#############
+
+Doplňky se dělí momentálně do 3 kategorií: packages (velké balíčky), components (komponenty) a modules (části aplikace).
+
+Struktura composer.json
+-----------------------
+Jako typ v composer.json dáme thunbolt-component:
+
+/--json
+
+{
+	"name": "package/custom-component",
+	"type": "thunbolt-component"
+}
+
+\--
+
+V případě potřeby lze uvádět i verze composer installeru.
+
+/--json
+
+{
+	"name": "package/custom-component",
+	"type": "thunbolt-component",
+	"require": {
+		"thunbolt/composer-installer": "^x.x"
+	}
+}
+
+\--
+
+Můžeme připojit i konfigurační soubor (cesta je relativní od composer.json):
+
+
+/--json
+
+{
+	"name": "package/custom-component",
+	"type": "thunbolt-component",
+	"require": {
+		"thunbolt/composer-installer": "^x.x"
+	},
+	"extra": {
+		"configs": ["path/config.neon"]
+	}
+}
+
+\--
+
+K některým doplňkům neodmyslitelně patří i js, css, popř. jiné soubory, které potřebujeme zobrazit uživateli:
+
+
+/--json
+
+{
+	"name": "package/custom-component",
+	"type": "thunbolt-component",
+	"require": {
+		"thunbolt/composer-installer": "^x.x"
+	},
+	"extra": {
+		"configs": ["path/config.neon"],
+		"assets": ["path/*", "another-path/*.css", "single.js"]
+	}
+}
+
+\--
+
+Všechny soubory se objeví ve složce www/mod-assets/package/custom-component a dále jejich cesta, pro path/* je to custom-component/path/*.
