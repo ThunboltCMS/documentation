@@ -1,0 +1,36 @@
+Příprava na spuštění projektu
+#############################
+
+Prvně než se pustíme do instalace toho projektu, **přečtěte** (nejlépe pochopte) si veškerou "dokumentaci o Nette framework":https://doc.nette.org,
+tato dokumentace její znalost předpokládá!
+
+Composer
+--------
+Neznáte-li nástroj composer, tak vězte, že se bez toho nástroje neobejdete (instalace administrace, komponent, ...).
+"Přečtěte si":https://doc.nette.org/cs/2.4/composer něco málo o tomto nástroji a navíc si ulehčíte nepříjemnou práci.
+
+Konečně instalace
+-----------------
+Nyní už stačí dát do terminálu tento kód `composer create-project thunbolt/cms` a už se projekt stahuje a připravuje.
+
+To není vše
+-----------
+Aby toho nebylo málo, tak si práci ještě usnadníme a nainstalujeme tyto nástroje: "node.js":https://nodejs.org/en/download, grunt, bower
+
+**Grunt**
+Nástroj sloužící na sloučení a minifikaci css a js souborů, nainstalujeme globálně příkazem: `npm install -g grunt`
+
+**Bower**
+Stahování verzovaných css a js souborů patřící k projektu automaticky? Tak právě proto je tu tento nástroj: `npm install -g bower`
+
+
+A bez toho se neobejdem
+-----------------------
+Naklikáme si (spíše napíšem) kořenový adresář pro projekt a spustíme pár příkazu:
+
+`npm install` - další potřebné balíčky, nainstalují se lokálně do složky node_modules
+ `bower install` - stáhneme css a js soubory
+ `php www/index.php orm:schema-tool:create` Vytvoří tabulky, indexy, asociace, ...
+ `php www/index.php insert-values` Vloží počáteční hodnoty do databáze
+
+**Hotovo, můžeme spustit aplikaci a pokračovat dále ve čtení dokumentace.**

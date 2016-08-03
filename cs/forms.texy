@@ -1,0 +1,89 @@
+Formuláře
+*********
+
+Vytvoříme základ formuláře, který bude umístěn ve složce app/modules/User/**components/UserForm.php**
+
+/--php
+
+<?php
+
+namespace App\UserModule\Components;
+
+use Thunbolt\Forms\BaseControl;
+
+class UserForm extends BaseControl {
+
+}
+
+\--
+
+Můj první formulář
+------------------
+K vytvoření formuláře použijeme továrnu na formuláře, kterou poskytuje BaseControl.
+
+
+/---php
+
+<?php
+
+namespace App\UserModule\Components;
+
+use Thunbolt\Forms\BaseControl;
+
+class UserForm extends BaseControl {
+
+	public function createSimpleUser() {
+		$form = $this->createForm();
+
+		$form->addText('name', 'Username')
+			->setRequired();
+
+		$form->onSuccess[] = function () {
+			// ...
+		};
+
+		return $form;
+	}
+
+}
+
+\---
+
+registrace do **konfiguračního souboru**:
+
+/---neon
+services:
+	userForm: App\UserModule\Components\UserForm
+\---
+
+a použití v **presenteru**:
+
+/---php
+<?php
+
+namespace App\Presenters\FrontModule;
+
+use App\UserModule\Components;
+
+class UserPresenter extends FrontPresenter {
+
+	/** @var Components\UserForm */
+	private $userForm;
+
+	public function __construct(Components\UserForm $userForm) {
+		$this->userForm = $userForm;
+	}
+
+	protected function createComponentCreateUserForm() {
+		$form = $this->userForm->createSimpleUser();
+
+		$form->onSuccess[] = function () { ... };
+
+		return $form;
+	}
+
+}
+\---
+
+.[note]
+Základní třída **Thunbolt\Forms\BaseControl** obsahuje metodu **flashMessage** a proměnou **$em** (Doctrine\ORM\EntityManager)

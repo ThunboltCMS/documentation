@@ -1,0 +1,5 @@
+{
+	"name": "thunbolt/documentation",
+	"type": "library",
+	"autoload": ["src/"]
+}

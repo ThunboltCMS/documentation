@@ -1,0 +1,37 @@
+Assets manager
+##############
+
+Css a js soubory definujeme v souboru app/config/**assets.yaml** .
+
+.[info]
+Proč yaml? Protože pro node.js v tuto chvíli neexistuje neon knihovna.
+
+Ukázkový příklad obsahu
+=======================
+
+/--yaml
+
+front: # bod 1
+  css: # bod 2
+    "compiled/front.min.css": # bod 3
+      - "components/example/example.css" # bod 4
+  js: # bod 2
+    "compiled/front.min.js": # bod 3
+      - "components/example/example.js" # bod 4
+
+
+\--
+
+1) Jméno není důležité, lze nahradit za -
+2) Jedná-li se o css nebo js soubory
+3) Cesta k minimalizovanému souboru (pro grunt www/compiled/front.min.css)
+4) Cesty k css souborů bez www složky
+
+Zápis v šabloně
+===============
+
+/--html
+{assets compiled/front.min.css}
+\--
+
+Podle **prostředí** vypíše celý seznam nebo minifikované verze.

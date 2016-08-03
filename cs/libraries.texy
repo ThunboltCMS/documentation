@@ -1,0 +1,67 @@
+Použíté knihovny
+################
+
+Níže popíšu seznam knihoven, které nejsou pro běh aplikace potřeba a můžou být odebrány.
+
+kdyby/translation
+-----------------
+Překladatelská knihovna.
+
+**Co je potřeba pro její odstranění?**
+Nahradit Thunbolt\Translation\Translation (nachází se v mod/package složce) za svojí třídu se svými pevně danými překlady.
+
+V konfiguračním souboru stačí přepsat:
+/--neon
+services:
+	class: MyTranslationClass
+\--
+
+Odstranit tuto extension se svého config.neon
+
+
+nextras/mail-panel
+------------------
+Odeslané emaily se ukládají tady a můžete si je prohlídnout v tracy panelu.
+
+webchemistry/forms-multiplier
+-----------------------------
+Replikace formulářových komponent.
+
+webchemistry/forms-wizard
+-------------------------
+Formulářový wizard.
+
+webchemistry/filter
+-------------------
+Knihovna umožňujicí spoustu funkcí nad daty.
+
+webchemistry/parameters
+-----------------------
+key-value hodnoty v databázi jednoduše přes konfig.
+
+webchemistry/images
+-------------------
+Správce obrázku.
+
+webchemistry/widgets
+--------------------
+Umožňuje definovat komponenty v konfiguračním souboru namísto v presenteru (vhodné pro doplňky).
+
+thunbolt/commands
+-----------------
+Poskytuje příkaz insert-values.
+
+thunbolt/user
+-------------
+Rozšiřující vrstva nad nette/security, potřebná pro administraci.
+
+thunbolt/bar
+------------
+V produkci zobrazí tyto panely:
+
+**Doctrine:** seznam databázi a její manipulace.
+**Cache:** Seznam složek a souborů v temp/ a její manipulace.
+
+thunbolt/doctrine-timestamp
+---------------------------
+Spravuje a vytvoří create a updated proměnné v entitě přes trait.

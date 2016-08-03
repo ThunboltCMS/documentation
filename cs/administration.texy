@@ -1,0 +1,64 @@
+Administrace
+############
+
+Administrace nainstalujeme `composer require thunbolt-module/admin`.
+
+Nutná příprava
+==============
+Vytvoříme základní presenter app/other/presenters/**AdminPresenter.php**
+
+/--php
+<?php
+
+namespace App\Presenters\AdminModule;
+
+use Thunbolt\Presenters\AdminModule;
+
+class AdminPresenter extends AdminModule\AdminPresenter {
+
+}
+
+\--
+
+Hlavní modul obsahuje autentikátor Thunbolt\User\Authenticator, který lze nahradit za svůj. Jméno služby je
+**thunbolt.authenticator**.
+
+
+Ještě je potřeba vytvořit entity pro uživatele, která musí implementovat rozhraní Thunbolt\User\Interfaces\IUser, pokud
+použijeme vestavěný autentikátor.
+
+/--php
+<?php
+
+namespace Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Thunbolt\User\Interfaces\IUser;
+
+/**
+ * @ORM\Entity(repositoryClass="Repository\UserRepository")
+ */
+class User extends Container implements IUser {
+
+	// ...
+
+}
+
+\--
+
+/--php
+<?php
+
+namespace Repository;
+
+use Thunbolt\User\Interfaces\IRepository;
+
+class UserRepository extends Container implements IRepository {
+
+	// ...
+
+}
+\--
+
+
+TODO
