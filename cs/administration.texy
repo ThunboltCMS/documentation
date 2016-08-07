@@ -5,6 +5,9 @@ Administrace nainstalujeme `composer require thunbolt-module/admin`.
 
 Nutná příprava
 ==============
+
+Presenter
+---------
 Vytvoříme základní presenter app/other/presenters/**AdminPresenter.php**
 
 /--php
@@ -20,45 +23,57 @@ class AdminPresenter extends AdminModule\AdminPresenter {
 
 \--
 
-Hlavní modul obsahuje autentikátor Thunbolt\User\Authenticator, který lze nahradit za svůj. Jméno služby je
-**user.authenticator**.
-
-
-Ještě je potřeba vytvořit entity pro uživatele, která musí implementovat rozhraní Thunbolt\User\Interfaces\IUser, pokud
-použijeme vestavěný autentikátor.
-
-/--php
-<?php
-
-namespace Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-use Thunbolt\User\Interfaces\IUser;
-
-/**
- * @ORM\Entity(repositoryClass="Repository\UserRepository")
- */
-class User extends Container implements IUser {
-
-	// ...
-
-}
-
+**Vlastní autentikátor:**
+Hlavní modul obsahuje autentikátor Thunbolt\User\Authenticator, který lze nahradit za svůj v konfiguračním souboru:
+/--neon
+user:
+	authenticator: Custom\Authenticator
 \--
 
+Model
+-----
+Základní uživatelská entita:
+/--php .[truncate]
+	{{file: administration/entity.php}}
+\--
+
+Repositář:
+
 /--php
-<?php
+	{{file: administration/repository.php}}
+\--
 
-namespace Repository;
+Napíšeme insert command, pro snažší vložení uživatelů přes konzoli:
 
-use Thunbolt\User\Interfaces\IRepository;
+/--php .[truncate]
+	{{file: administration/insert.php}}
+\--
 
-class UserRepository extends Container implements IRepository {
+Konfigurace
+-----------
 
-	// ...
+zaregistrujeme jej do konfiguračního souboru:
 
-}
+/--neon
+commands:
+	- Inserts\UserInsert
+\--
+
+vypneme autorizátor, pokud jsme ho předem nenastavili nebo ho chceme zakázat:
+
+/--neon
+user:
+	authorizator:
+		enable: no
+\--
+
+a provedeme pár příkazů do terminálu:
+
+/--bash
+# aktualizace tabulek
+php www/index.php orm:schema-tool:update --force
+# vložení hodnot do tabulek
+php www/index.php insert-values
 \--
 
 
-TODO
